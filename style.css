@@ -1,0 +1,347 @@
+/* style.css — Countdown Days */
+
+/* ── Design tokens ─────────────────────────────────────────────────────────── */
+
+:root {
+  --bg:          #f5f5f5;
+  --surface:     #ffffff;
+  --surface2:    #f0f0f0;
+  --text:        #1a1a1a;
+  --text-muted:  #666666;
+  --border:      #e0e0e0;
+  --accent:      #4f8ef7;
+  --danger:      #e53935;
+  --radius:      12px;
+  --radius-sm:   6px;
+  --shadow:      0 2px 8px rgba(0,0,0,.08);
+  --shadow-lg:   0 8px 32px rgba(0,0,0,.15);
+  --transition:  .2s ease;
+}
+
+[data-theme="dark"] {
+  --bg:          #121212;
+  --surface:     #1e1e1e;
+  --surface2:    #2a2a2a;
+  --text:        #f0f0f0;
+  --text-muted:  #888888;
+  --border:      #333333;
+  --shadow:      0 2px 8px rgba(0,0,0,.4);
+  --shadow-lg:   0 8px 32px rgba(0,0,0,.6);
+}
+
+/* ── Reset ─────────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue',
+               'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+}
+
+/* ── Layout ────────────────────────────────────────────────────────────────── */
+
+.app-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.app-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  flex: 1;
+}
+
+.app-title span { font-size: 1.4rem; margin-right: .4rem; }
+
+.header-actions { display: flex; gap: .5rem; }
+
+main { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+/* ── Buttons ───────────────────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .5rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: .9rem;
+  font-weight: 600;
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.btn:hover { opacity: .85; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn--primary { background: var(--accent); color: #fff; }
+.btn--secondary {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-icon {
+  width: 2rem; height: 2rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  font-size: 1rem;
+  transition: background var(--transition);
+}
+.btn-icon:hover { background: var(--surface2); }
+
+/* ── Cards ─────────────────────────────────────────────────────────────────── */
+
+.section { margin-bottom: 2.5rem; }
+.section__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: 1rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  border-left: 5px solid var(--card-color, var(--accent));
+  box-shadow: var(--shadow);
+  transition: box-shadow var(--transition), transform var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+
+.card--past {
+  opacity: .75;
+  border-left-color: var(--text-muted);
+}
+
+.card--today {
+  border-left-width: 6px;
+  box-shadow: 0 0 0 2px var(--card-color, var(--accent)), var(--shadow-lg);
+}
+
+.card__header {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.card__icon { font-size: 1.5rem; }
+.card__name {
+  flex: 1;
+  font-weight: 600;
+  font-size: .95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card__actions { display: flex; gap: .25rem; }
+
+.card__days {
+  display: flex;
+  align-items: baseline;
+  gap: .4rem;
+}
+
+.card__days-num {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--card-color, var(--accent));
+}
+
+.card__today-label {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--card-color, var(--accent));
+}
+
+.card__days-label {
+  font-size: .9rem;
+  color: var(--text-muted);
+}
+
+.card__live {
+  font-size: .8rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+}
+
+.card__date {
+  font-size: .8rem;
+  color: var(--text-muted);
+}
+
+/* ── Empty state ───────────────────────────────────────────────────────────── */
+
+.empty-msg {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 4rem 1rem;
+  font-size: 1.1rem;
+}
+
+/* ── Modal ─────────────────────────────────────────────────────────────────── */
+
+.modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1rem;
+}
+
+.modal--open .modal-backdrop,
+.modal-backdrop.modal--open {
+  display: flex;
+}
+
+/* When #modal has class modal--open, show its backdrop child */
+#modal.modal--open > .modal-backdrop { display: flex; }
+
+.modal-box {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 2rem;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+}
+
+.modal-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.field { display: flex; flex-direction: column; gap: .35rem; }
+
+.field label {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.field input[type="text"],
+.field input[type="date"] {
+  padding: .6rem .75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+  font: inherit;
+  font-size: .95rem;
+  transition: border-color var(--transition);
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.field input[type="color"] {
+  width: 3rem; height: 2rem;
+  padding: 0 .2rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  cursor: pointer;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.field-error {
+  font-size: .8rem;
+  color: var(--danger);
+  min-height: 1rem;
+}
+
+/* Presets */
+.presets-label {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: .4rem;
+}
+
+.preset-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.preset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  padding: .35rem .7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  font-size: .8rem;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.preset-btn:hover { background: var(--border); border-color: var(--accent); }
+.preset-icon { font-size: 1rem; }
+
+/* Modal footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: .75rem;
+  padding-top: .5rem;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+  .app-title { font-size: 1.05rem; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .card__days-num { font-size: 2.8rem; }
+  main { padding: 1.25rem 1rem; }
+}

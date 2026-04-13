@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>カウントダウン | Countdown Days</title>
+  <meta name="description" content="イベントまでの日数カウントダウン & 過去日数カウントアップ。複数イベント、プリセット、URL 共有。" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="app-header">
+  <h1 class="app-title"><span>⏳</span><span id="app-title-text">カウントダウン</span></h1>
+  <div class="header-actions">
+    <button class="btn btn--primary" id="btn-add">イベントを追加</button>
+    <button class="btn btn--secondary" id="btn-lang" title="言語切替">EN</button>
+    <button class="btn btn--secondary" id="btn-theme" title="テーマ切替">🌙</button>
+  </div>
+</header>
+
+<main>
+  <div id="grid"></div>
+</main>
+
+<!-- ── Add/Edit Modal ───────────────────────────────────────────────────────── -->
+<div id="modal">
+  <div class="modal-backdrop" id="modal-backdrop">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <h2 class="modal-title" id="modal-title">イベントを追加</h2>
+
+      <!-- Presets -->
+      <div>
+        <p class="presets-label">テンプレート</p>
+        <div class="preset-list" id="preset-list"></div>
+      </div>
+
+      <!-- Name -->
+      <div class="field">
+        <label for="input-name">イベント名 <span aria-hidden="true">*</span></label>
+        <input type="text" id="input-name" maxlength="100" placeholder="例: 誕生日" autocomplete="off" />
+        <span class="field-error" id="err-name" aria-live="polite"></span>
+      </div>
+
+      <!-- Date -->
+      <div class="field">
+        <label for="input-date">日付 <span aria-hidden="true">*</span></label>
+        <input type="date" id="input-date" />
+        <span class="field-error" id="err-date" aria-live="polite"></span>
+      </div>
+
+      <!-- Icon + Color -->
+      <div class="field-row">
+        <div class="field">
+          <label for="input-icon">アイコン</label>
+          <input type="text" id="input-icon" maxlength="4" placeholder="🗓️" />
+        </div>
+        <div class="field">
+          <label for="input-color">カラー</label>
+          <input type="color" id="input-color" value="#4f8ef7" />
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer">
+        <button class="btn btn--secondary" id="btn-cancel">キャンセル</button>
+        <button class="btn btn--primary" id="btn-save">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
