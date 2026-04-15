@@ -61,3 +61,10 @@ import {
 ## License
 
 MIT © 2026 SEN LLC (SEN 合同会社)
+
+<!-- sen-publish:links -->
+## Links
+
+- 🌐 Demo: https://sen.ltd/portfolio/countdown-days/
+- 📝 dev.to: https://dev.to/sendotltd/a-countdown-tracker-that-handles-dst-timezones-and-calendar-day-math-correctly-1koc
+<!-- /sen-publish:links -->
